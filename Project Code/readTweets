@@ -1,0 +1,59 @@
+from tweepy.streaming import StreamListener
+from tweepy.auth import OAuthHandler
+from tweepy.streaming import Stream
+import time
+import sqlite3 as lite
+import sys
+
+
+consumerkey = 'LTw7nMEJcRlhg781oex5UA'
+consumersecret = 'gPoCakr60iEQPhGBh0vEV10j82NCUpkEf1z5U2HUzg'
+authtoken = '13804892-70uHupOVr7thS10qtqIK2xg6eQHg5WTeYS2adA01g'
+authsecret = 'sOpZpZcjdMzrRMrZg2tMh29IAQEiGSNWStdT5ignUuSm2'
+
+a = 0
+forFileName = 0
+fileName = "tweets"+str(forFileName)+".csv"
+class listener(StreamListener):
+    
+    def on_data(self, data):
+        global fileName
+        global forFileName
+        try:
+            # each log file will have 100k tweets, then a new file will be made
+            if a%100000 == 0:
+                forFileName+=1
+                # can also make a log file
+                fileName = "tweets"+str(forFileName)+".csv"
+                print fileName
+                a = 1
+            # make a directory named "tweets" where this script resides, otherwise the below code will give you an error
+            saveFile = open("./tweets/"+fileName, 'a')
+            saveFile.write(data)
+            #saveFile.write('\n')
+            global a
+            a+=1
+            return True
+        except BaseException, e:
+            print "failed on"+filename+" "+str(a)
+            time.sleep(10)
+
+    def on_error(self, status):
+        print status
+
+auth = OAuthHandler(consumerkey, consumersecret)
+auth.set_access_token(authtoken, authsecret)
+twitterStream = Stream(auth, listener())
+con = lite.connect("projectDB.db")
+
+with con:    
+    
+    cur = con.cursor()    
+    cur.execute('SELECT keyword FROM mykeywords')
+
+    '''rows = cur.fetchall()
+
+    for row in rows:
+        print row'''
+
+#twitterStream.filter(track=cur.fetchall())
