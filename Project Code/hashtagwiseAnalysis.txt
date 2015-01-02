@@ -1,0 +1,56 @@
+1)
+query:
+select count(*), sentiment from default.comb where text like '%#ModiInAmerica%' or text like '%#PMNaMoVisitsUS%' or 
+text like '%#ModiInUSA%' or text like '%#ModiInUS%' or text like '%#ModiMeetsAmerica%' or text like '%#PMUSvisit%' 
+group by sentiment
+
+result:
+null = 4844, 0 = 11089, 1 = 47963, 2 = 50007
+
+2) 
+query:
+select count(*), sentiment from default.comb where text 
+like '%#UNGA%' or text like '%#NaMoinUN%' 
+or 
+text like '%#ModiAtUN%' or text like '%#UNGA2014%' 
+group by sentiment
+
+result:
+null = 4438, 0 = 9319, 1 = 18115, 2 = 24612
+
+3) 
+query:
+select count(*), sentiment from default.comb where text 
+like '%#MadisonSquare%' or text like '%#MadisonSquareGarden%' 
+or 
+text like '%#MODIson%' or text like '%#ModiAtMadison%' or
+text like '%#PMModiAtMadison%' or text like '%#namoInMadison%' 
+group by sentiment
+
+result:
+null = 16713, 0 = 11396, 1 = 39114, 2 = 48091
+
+4) 
+query:
+select count(*), sentiment from default.comb where text 
+like '%#WSJModi%' or text like '%#ModiMeetsCEOs%' 
+or 
+text like '%#ModiAtCFR%' 
+group by sentiment
+
+result:
+null = 79, 0 = 233, 1 = 578, 2 = 688
+
+5)
+query:
+select count(*), sentiment from default.comb where text 
+like '%#ModiAtWashingtonDC%' or text like '%#ModiAtWhiteHouse%' or 
+text like '%#NaMoMeetsObama%' or text like '%#NaMowithObama%' or 
+text like '%#IndiaUSPartnership%' or text like '%#USIndiaPartnership%'
+or 
+text like '%#ModiObamaMeet%' or text like '%#ModiMeetsObama%' 
+group by sentiment
+
+result
+null = 1124, 0 = 1069, 1 = 4165, 2 = 3953
+
